@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>江苏省前黄高级中学 · 导航</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg-deep:#0a0a0f;--bg-card:rgba(25,25,35,0.6);--gold:#b8864b;--gold-light:#d4a574;--text-main:#e8e6e3;--text-sub:#8a8885}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg-deep);color:var(--text-main);min-height:100vh;overflow-x:hidden}
+body::before,body::after{content:'';position:fixed;pointer-events:none;z-index:0}
+body::before{top:-30%;left:-20%;width:800px;height:800px;background:radial-gradient(circle,rgba(156,108,62,0.12) 0%,transparent 60%)}
+body::after{bottom:-30%;right:-20%;width:700px;height:700px;background:radial-gradient(circle,rgba(156,108,62,0.08) 0%,transparent 60%)}
+
+#splash{position:fixed;inset:0;background:var(--bg-deep);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s ease,visibility .6s ease}
+#splash.hide{opacity:0;visibility:hidden}
+.splash-logo{width:200px;height:200px;opacity:0;transform:scale(.5);animation:logoIn 1.6s cubic-bezier(.22,1,.36,1) forwards;filter:drop-shadow(0 0 30px rgba(156,108,62,.6))}
+.splash-logo img{width:100%;height:100%;object-fit:contain}
+@keyframes logoIn{
+0%{opacity:0;transform:scale(.3) rotate(-10deg);filter:drop-shadow(0 0 0 rgba(156,108,62,0))}
+50%{opacity:1;transform:scale(1.08) rotate(2deg);filter:drop-shadow(0 0 50px rgba(156,108,62,.8))}
+70%{transform:scale(.95)}
+100%{opacity:1;transform:scale(1) rotate(0);filter:drop-shadow(0 0 25px rgba(156,108,62,.5))}
+}
+.splash-ring{position:absolute;width:280px;height:280px;border:1px solid var(--gold);border-radius:50%;opacity:0;animation:ringExpand 1.8s ease-out .4s forwards}
+.splash-ring.r2{animation-delay:.6s;width:340px;height:340px}
+.splash-ring.r3{animation-delay:.8s;width:400px;height:400px}
+@keyframes ringExpand{0%{opacity:0;transform:scale(.5)}50%{opacity:.6}100%{opacity:0;transform:scale(1.3)}}
+
+#boot{position:fixed;inset:0;background:var(--bg-deep);z-index:9998;opacity:0;visibility:hidden;transition:opacity .5s ease;font-family:"SF Mono",Consolas,Menlo,monospace}
+#boot.show{opacity:1;visibility:visible}
+#boot.hide{opacity:0;visibility:hidden}
+.boot-container{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(720px,88vw)}
+.boot-header{display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid rgba(156,108,62,.3);margin-bottom:24px}
+.boot-dot{width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);animation:blink 1.2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.boot-title{color:var(--gold-light);font-size:14px;letter-spacing:2px}
+.boot-status{margin-left:auto;color:var(--text-sub);font-size:12px}
+.boot-lines{height:340px;overflow:hidden;position:relative}
+.boot-line{color:var(--text-main);font-size:14px;line-height:2.2;opacity:0;transform:translateX(-10px);transition:all .4s ease}
+.boot-line.show{opacity:1;transform:translateX(0)}
+.boot-line .prefix{color:var(--gold);margin-right:8px}
+.boot-line .highlight{color:var(--gold-light)}
+.boot-line .cursor{display:inline-block;width:8px;height:16px;background:var(--gold);vertical-align:middle;margin-left:4px;animation:blink .8s infinite}
+.boot-progress{margin-top:28px;height:2px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.boot-progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold-light));box-shadow:0 0 10px rgba(156,108,62,.6);transition:width .3s ease}
+.boot-skip{position:absolute;right:40px;bottom:36px;color:var(--text-sub);font-size:13px;cursor:pointer;padding:8px 16px;border:1px solid rgba(156,108,62,.2);border-radius:6px;transition:all .3s;user-select:none;z-index:10}
+.boot-skip:hover{color:var(--gold-light);border-color:var(--gold);background:rgba(156,108,62,.08)}
+
+#main{position:relative;z-index:1;opacity:0;transform:translateY(30px);transition:opacity 1s ease .2s,transform 1s ease .2s}
+#main.show{opacity:1;transform:translateY(0)}
+.header{padding:60px 20px 40px;text-align:center}
+.header-logo{width:120px;height:120px;margin:0 auto 20px;filter:drop-shadow(0 4px 20px rgba(156,108,62,.4));animation:float 6s ease-in-out infinite}
+.header-logo img{width:100%;height:100%;object-fit:contain}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.header h1{font-size:32px;font-weight:600;letter-spacing:4px;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.header .subtitle{color:var(--text-sub);font-size:14px;letter-spacing:2px;font-family:"Times New Roman",serif}
+.header .est{margin-top:12px;color:var(--gold);font-size:13px;letter-spacing:3px;opacity:.8}
+.divider{width:60px;height:2px;margin:0 auto 40px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.container{max-width:1100px;margin:0 auto;padding:0 24px 40px}
+.section-title{font-size:18px;color:var(--gold-light);margin-bottom:20px;padding-left:12px;border-left:3px solid var(--gold);letter-spacing:1px;display:flex;align-items:center;justify-content:space-between}
+.section-title .more{font-size:12px;color:var(--text-sub);font-weight:normal;text-decoration:none;transition:color .3s}
+.section-title .more:hover{color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;margin-bottom:48px}
+.card{position:relative;padding:24px;background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:12px;cursor:pointer;transition:all .35s cubic-bezier(.22,1,.36,1);backdrop-filter:blur(10px);overflow:hidden;text-decoration:none;color:inherit;display:block}
+.card::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,rgba(156,108,62,.15) 0%,transparent 50%);opacity:0;transition:opacity .35s}
+.card:hover{transform:translateY(-4px);border-color:rgba(156,108,62,.3);box-shadow:0 12px 40px rgba(0,0,0,.4),0 0 20px rgba(156,108,62,.15)}
+.card:hover::before{opacity:1}
+.card-icon{width:40px;height:40px;margin-bottom:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(156,108,62,.2),rgba(156,108,62,.05));border-radius:10px;color:var(--gold-light);font-size:20px}
+.card h3{font-size:15px;font-weight:500;margin-bottom:8px;position:relative;z-index:1;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .date{font-size:12px;color:var(--gold);opacity:.8;position:relative;z-index:1;margin-bottom:6px}
+.card p{font-size:13px;color:var(--text-sub);line-height:1.6;position:relative;z-index:1}
+.card .arrow{position:absolute;right:20px;bottom:20px;color:var(--gold);opacity:0;transform:translateX(-8px);transition:all .3s;font-size:14px}
+.card:hover .arrow{opacity:1;transform:translateX(0)}
+.skeleton{animation:shimmer 1.5s infinite linear;background:linear-gradient(90deg,rgba(255,255,255,.03) 25%,rgba(255,255,255,.08) 50%,rgba(255,255,255,.03) 75%);background-size:200% 100%;border-radius:4px}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.skeleton-title{height:18px;margin-bottom:10px;width:80%}
+.skeleton-date{height:12px;width:40%;margin-bottom:8px}
+
+.old-site-entry{max-width:1100px;margin:0 auto 30px;padding:0 24px}
+.old-site-link{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-size:13px;color:var(--text-sub);border:1px solid rgba(255,255,255,.06);border-radius:999px;background:rgba(255,255,255,.02);text-decoration:none;transition:all .3s}
+.old-site-link:hover{color:var(--gold-light);border-color:rgba(156,108,62,.3);background:rgba(156,108,62,.06)}
+.old-site-link .icon{font-size:14px}
+.footer{text-align:center;padding:30px 20px;color:var(--text-sub);font-size:12px;border-top:1px solid rgba(255,255,255,.05);line-height:1.8}
+.footer .contact{margin-bottom:8px;color:var(--text-main);opacity:.7}
+
+@media (max-width:600px){
+.header h1{font-size:24px;letter-spacing:2px}
+.grid{grid-template-columns:1fr}
+.splash-logo{width:160px;height:160px}
+.boot-lines{height:280px}
+.boot-line{font-size:13px}
+.boot-skip{right:20px;bottom:24px}
+}
+</style>
+</head>
+<body>
+<div id="splash">
+  <div class="splash-ring"></div>
+  <div class="splash-ring r2"></div>
+  <div class="splash-ring r3"></div>
+  <div class="splash-logo"><img src="logo.webp" alt="校徽"></div>
+</div>
+
+<div id="boot">
+  <div class="boot-container">
+    <div class="boot-header">
+      <div class="boot-dot"></div>
+      <div class="boot-title">QIANHUANG SENIOR MIDDLE SCHOOL · SYSTEM INITIALIZING</div>
+      <div class="boot-status" id="bootStatus">LOADING...</div>
+    </div>
+    <div class="boot-lines" id="bootLines">
+      <div class="boot-line"><span class="prefix">></span>正在初始化校园导航系统...</div>
+      <div class="boot-line"><span class="prefix">></span>载入校史档案 <span class="highlight">[1939 - 2026]</span></div>
+      <div class="boot-line"><span class="prefix">></span>江苏省首批重点中学 <span class="highlight">[1957]</span></div>
+      <div class="boot-line"><span class="prefix">></span>国家级示范性普通高中 <span class="highlight">[1999]</span></div>
+      <div class="boot-line"><span class="prefix">></span>江苏省首批四星级高中 <span class="highlight">[2004]</span></div>
+      <div class="boot-line"><span class="prefix">></span>江苏省高品质示范高中 <span class="highlight">[2019]</span></div>
+      <div class="boot-line"><span class="prefix">></span>办学精神：艰苦奋斗 · 务实创新 · 争创一流</div>
+      <div class="boot-line"><span class="prefix">></span>校训：景德闳识</div>
+      <div class="boot-line"><span class="prefix">></span>正在连接校园数据节点...</div>
+      <div class="boot-line"><span class="prefix">></span>资源加载完成，准备进入<span class="cursor"></span></div>
+    </div>
+    <div class="boot-progress"><div class="boot-progress-bar" id="bootBar"></div></div>
+  </div>
+  <div class="boot-skip" id="bootSkip">跳过 ></div>
+</div>
+
+<div id="main">
+  <header class="header">
+    <div class="header-logo"><img src="logo.webp" alt="校徽"></div>
+    <h1>江苏省前黄高级中学</h1>
+    <div class="subtitle">QIANHUANG SENIOR MIDDLE SCHOOL</div>
+    <div class="est">— 始建于 1939 年 · 景德闳识 —</div>
+  </header>
+  <div class="divider"></div>
+
+  <div class="container">
+    <div class="section-title">
+      学校新闻
+      <a href="http://www.qhgz.wj.czedu.cn/html/node156651.html" target="_blank" class="more">查看更多 →</a>
+    </div>
+    <div class="grid" id="newsGrid">
+      <div class="card"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-date"></div></div>
+      <div class="card"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-date"></div></div>
+      <div class="card"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-date"></div></div>
+      <div class="card"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-date"></div></div>
+    </div>
+
+    <div class="section-title">
+      信息公开
+      <a href="http://www.qhgz.wj.czedu.cn/html/node156655.html" target="_blank" class="more">查看更多 →</a>
+    </div>
+    <div class="grid" id="infoGrid">
+      <div class="card"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-date"></div></div>
+      <div class="card"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-date"></div></div>
+      <div class="card"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-date"></div></div>
+      <div class="card"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-date"></div></div>
+    </div>
+
+    <div class="section-title">科技特色</div>
+    <div class="grid">
+      <a href="http://36.213.7.230:30003" target="_blank" class="card">
+        <div class="card-icon">🤖</div>
+        <h3>AI 学习平台</h3>
+        <p>校园 AI 应用、智能助手与教学平台</p>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <div class="section-title">快速入口</div>
+    <div class="grid">
+      <a href="http://www.qhgz.wj.czedu.cn/html/node156652.html" target="_blank" class="card">
+        <div class="card-icon">💻</div>
+        <h3>课程教学</h3>
+        <p>信息化教学、国际课程、教研资源</p>
+        <span class="arrow">→</span>
+      </a>
+      <a href="http://www.qhgz.wj.czedu.cn/html/node156653.html" target="_blank" class="card">
+        <div class="card-icon">👨‍🏫</div>
+        <h3>教师发展</h3>
+        <p>优师风采、名师工作室、师德建设</p>
+        <span class="arrow">→</span>
+      </a>
+      <a href="http://www.qhgz.wj.czedu.cn/html/node156654.html" target="_blank" class="card">
+        <div class="card-icon">🎒</div>
+        <h3>学生发展</h3>
+        <p>五育融合、表彰奖励、社团活动</p>
+        <span class="arrow">→</span>
+      </a>
+      <a href="http://www.qhgz.wj.czedu.cn/html/node156656.html" target="_blank" class="card">
+        <div class="card-icon">🚩</div>
+        <h3>党建工作</h3>
+        <p>党建动态、廉政教育、理论学习</p>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="old-site-entry">
+    <a href="http://www.qhgz.wj.czedu.cn/" target="_blank" class="old-site-link">
+      <span class="icon">🌐</span><span>访问官方网站</span>
+    </a>
+  </div>
+
+  <footer class="footer">
+    <div class="contact">学校地址：江苏省常州市湖塘广电西路152号 | 联系电话：0519-86305787</div>
+    © 江苏省前黄高级中学    （网站由2029-5班学生自制）
+  </footer>
+</div>
+
+<script>
+const NEWS_PAGE = 'http://www.qhgz.wj.czedu.cn/html/node156651.html';
+const CORS_PROXY = 'https://api.allorigins.win/get?url=';
+let dataLoaded = false, bootSkipped = false;
+
+prefetchData();
+setTimeout(() => {
+  document.getElementById('splash').classList.add('hide');
+  startBootAnimation();
+}, 1800);
+document.getElementById('bootSkip').addEventListener('click', () => {
+  bootSkipped = true;
+  enterMain();
+});
+
+async function prefetchData() {
+  try {
+    const res = await fetch(CORS_PROXY + encodeURIComponent(NEWS_PAGE));
+    const data = await res.json();
+    if (!data.contents) return;
+    const doc = new DOMParser().parseFromString(data.contents, 'text/html');
+    window.cachedNews = extractNewsItems(doc);
+    dataLoaded = true;
+    if (bootSkipped || document.getElementById('main').classList.contains('show')) renderNews();
+  } catch(e) { console.warn('新闻抓取失败', e) }
+}
+
+function startBootAnimation() {
+  const boot = document.getElementById('boot');
+  const lines = boot.querySelectorAll('.boot-line');
+  const bar = document.getElementById('bootBar');
+  const status = document.getElementById('bootStatus');
+  boot.classList.add('show');
+  let i = 0, total = lines.length;
+  const next = () => {
+    if (bootSkipped) return;
+    if (i >= total) {
+      status.textContent = 'READY';
+      bar.style.width = '100%';
+      setTimeout(enterMain, 600);
+      return;
+    }
+    lines[i].classList.add('show');
+    bar.style.width = ((i+1)/total*100) + '%';
+    i++;
+    setTimeout(next, 500);
+  };
+  setTimeout(next, 300);
+}
+
+function enterMain() {
+  document.getElementById('boot').classList.add('hide');
+  document.getElementById('main').classList.add('show');
+  if (dataLoaded) renderNews();
+  else {
+    const check = setInterval(() => {
+      if (dataLoaded) { clearInterval(check); renderNews() }
+    }, 200);
+  }
+}
+
+function renderNews() {
+  const items = window.cachedNews;
+  if (!items || !items.length) return;
+  renderCards('newsGrid', items.slice(0,4));
+  renderCards('infoGrid', items.slice(4,8));
+}
+
+function extractNewsItems(doc) {
+  const items = [], dateRegex = /(\d{4}-\d{2}-\d{2}|\d{2}-\d{2})/g;
+  doc.querySelectorAll('a').forEach(a => {
+    const title = a.textContent.trim();
+    if (title.length < 8 || title.length > 80) return;
+    let parent = a.parentElement, dateText = '';
+    for (let i = 0; i < 4 && parent; i++) {
+      const m = parent.textContent.match(dateRegex);
+      if (m) { dateText = m[0]; break }
+      parent = parent.parentElement;
+    }
+    if (title.includes('省前中') || title.includes('江苏省') || title.includes('我校') || dateText) {
+      let href = a.getAttribute('href') || '';
+      if (href && !href.startsWith('http') && !href.startsWith('#')) {
+        try { href = new URL(href, NEWS_PAGE).href } catch { href = NEWS_PAGE }
+      }
+      if (!href || href.startsWith('#') || href.startsWith('javascript')) href = NEWS_PAGE;
+      items.push({ title, date: dateText || '', href });
+    }
+  });
+  const unique = [], seen = new Set();
+  items.forEach(item => {
+    if (!seen.has(item.title) && item.title.length > 10) {
+      seen.add(item.title);
+      unique.push(item);
+    }
+  });
+  return unique.length ? unique : null;
+}
+
+function renderCards(id, items) {
+  document.getElementById(id).innerHTML = items.map(item => `
+    <a href="${item.href}" target="_blank" class="card">
+      ${item.date ? `<div class="date">${item.date}</div>` : ''}
+      <h3>${item.title}</h3>
+      <span class="arrow">→</span>
+    </a>
+  `).join('');
+}
+</script>
+</body>
+</html>
